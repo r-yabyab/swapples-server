@@ -9,7 +9,8 @@ public class Game {
     // 0 = not started, 1 = started, 2 = ended
     private int gameState;
     private int score;
-    private static final int TIMER = 30;
+    public static final int TIMER_START = 30;
+    private int timer = TIMER_START;
 
     public Game() {
         this.gameState = 0;
@@ -33,7 +34,11 @@ public class Game {
     }
 
     public int getTimer() {
-        return TIMER;
+        return timer;
+    }
+
+    public void setTimer(int timer) {
+        this.timer = timer;
     }
 
     @Override
@@ -46,6 +51,6 @@ public class Game {
 
     @Override
     public int hashCode() {
-        return Objects.hash(gameState, score);
+        return Objects.hash(gameState, score, timer);
     }
 }
