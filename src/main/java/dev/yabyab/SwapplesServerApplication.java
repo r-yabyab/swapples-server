@@ -1,4 +1,4 @@
-package dev.yabyab.swapples_server;
+package dev.yabyab;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
