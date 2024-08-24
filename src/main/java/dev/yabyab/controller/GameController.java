@@ -26,6 +26,10 @@ public class GameController {
                 gameService.resetGame();
             }
             return gameService.getGame();
+        } else if ("rejoin".equalsIgnoreCase(message.trim())) {
+            if (gameService.getGame().getGameState() == 1) {
+                gameService.getGame();
+            }
         }
         return null; // Or handle other cases
     }

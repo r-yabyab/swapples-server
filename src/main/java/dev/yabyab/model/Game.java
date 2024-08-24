@@ -9,7 +9,7 @@ public class Game {
     // 0 = not started, 1 = started, 2 = ended
     private int gameState;
     private int score;
-    public static final int TIMER_START = 30;
+    public static final int TIMER_START = 15;
     private int timer = TIMER_START;
 
     public Game() {
@@ -39,6 +39,10 @@ public class Game {
 
     public void setTimer(int timer) {
         this.timer = timer;
+    }
+
+    public int getTimerStart() {
+        return TIMER_START;
     }
 
     @Override

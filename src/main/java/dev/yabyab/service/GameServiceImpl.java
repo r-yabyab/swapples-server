@@ -51,6 +51,7 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Game getGame() {
+        messagingTemplate.convertAndSend("/topic/game", game);
         return this.game;
     }
 }
