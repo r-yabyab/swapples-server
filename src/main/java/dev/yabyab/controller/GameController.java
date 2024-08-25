@@ -2,21 +2,26 @@ package dev.yabyab.controller;
 
 import dev.yabyab.model.Board;
 import dev.yabyab.model.Game;
+import dev.yabyab.model.MoveRequest;
 import dev.yabyab.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import java.util.List;
+
 @org.springframework.stereotype.Controller
 @CrossOrigin
 public class GameController {
 
     private final GameService gameService;
+    private final Board board;
 
     @Autowired
-    public GameController(GameService gameService) {
+    public GameController(GameService gameService, Board board) {
         this.gameService = gameService;
+        this.board = board;
     }
 
     @MessageMapping("/hello") // client sends here
@@ -43,5 +48,17 @@ public class GameController {
             return new Board();
         }
         return null;
+    }
+
+    @MessageMapping("/makeMove")
+    @SendTo("/topic/board")
+    public Board makeMove(MoveRequest moveRequest) throws Exception {
+        board.applyMove(moveRequest);
+
+////        if (board.isMatch(moveRequest.getTargetRow(), moveRequest.getTargetCol())) {
+////            board.applyMove(moveRequest);
+////            return board;
+//        }
+        return board;
     }
 }

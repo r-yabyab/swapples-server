@@ -2,9 +2,11 @@ package dev.yabyab.model;
 
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Component
 public class Board {
@@ -38,7 +40,7 @@ public class Board {
         return items.get(index);
     }
 
-    private boolean isMatch(int row, int col) {
+    public boolean isMatch(int row, int col) {
         String item = board[row][col];
 
         // Check horizontal match
@@ -52,6 +54,21 @@ public class Board {
         }
 
         return false;
+    }
+
+    public void applyMove(MoveRequest moveRequest) {
+        int srcRow = moveRequest.getSourceRow();
+        int srcCol = moveRequest.getSourceCol();
+        int tgtRow = moveRequest.getTargetRow();
+        int tgtCol = moveRequest.getTargetCol();
+
+        // Swap items
+        String temp = board[srcRow][srcCol];
+        board[srcRow][srcCol] = board[tgtRow][tgtCol];
+        board[tgtRow][tgtCol] = temp;
+
+        // Check for matches and update board
+        generateBoard(); // Call generateBoard or update logic after applying move
     }
 
     public String[][] getBoard() {
