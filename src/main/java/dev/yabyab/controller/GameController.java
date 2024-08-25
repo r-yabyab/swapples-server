@@ -1,5 +1,6 @@
 package dev.yabyab.controller;
 
+import dev.yabyab.model.Board;
 import dev.yabyab.model.Game;
 import dev.yabyab.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,15 @@ public class GameController {
             }
         }
         return null; // Or handle other cases
+    }
+
+    @MessageMapping("/generateBoard")
+    @SendTo("/topic/board")
+    public Board generateBoard(String message) throws Exception {
+//        Board board = new Board(8,8);
+        if ("generate".equalsIgnoreCase(message.trim())) {
+            return new Board();
+        }
+        return null;
     }
 }
