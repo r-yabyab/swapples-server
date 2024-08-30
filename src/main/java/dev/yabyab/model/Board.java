@@ -23,7 +23,7 @@ public class Board {
         generateBoard();
     }
 
-    private void generateBoard() {
+    public void generateBoard() {
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 String item;
@@ -35,7 +35,7 @@ public class Board {
         }
     }
 
-    private String getRandomItem() {
+    public String getRandomItem() {
         int index = (int) (Math.random() * items.size());
         return items.get(index);
     }
@@ -56,20 +56,20 @@ public class Board {
         return false;
     }
 
-    public void applyMove(MoveRequest moveRequest) {
-        int srcRow = moveRequest.getSourceRow();
-        int srcCol = moveRequest.getSourceCol();
-        int tgtRow = moveRequest.getTargetRow();
-        int tgtCol = moveRequest.getTargetCol();
-
-        // Swap items
-        String temp = board[srcRow][srcCol];
-        board[srcRow][srcCol] = board[tgtRow][tgtCol];
-        board[tgtRow][tgtCol] = temp;
-
-        // Check for matches and update board
-        generateBoard(); // Call generateBoard or update logic after applying move
-    }
+//    public void applyMove(MoveRequest moveRequest) {
+//        int srcRow = moveRequest.getSourceRow();
+//        int srcCol = moveRequest.getSourceCol();
+//        int tgtRow = moveRequest.getTargetRow();
+//        int tgtCol = moveRequest.getTargetCol();
+//
+//        // Swap items
+//        String temp = board[srcRow][srcCol];
+//        board[srcRow][srcCol] = board[tgtRow][tgtCol];
+//        board[tgtRow][tgtCol] = temp;
+//
+//        // Check for matches and update board
+//        generateBoard(); // Call generateBoard or update logic after applying move
+//    }
 
     public String[][] getBoard() {
         return board;

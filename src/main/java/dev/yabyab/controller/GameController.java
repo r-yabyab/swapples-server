@@ -4,6 +4,7 @@ import dev.yabyab.model.Board;
 import dev.yabyab.model.Game;
 import dev.yabyab.model.MoveRequest;
 import dev.yabyab.service.GameService;
+import dev.yabyab.service.MoveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -17,11 +18,13 @@ public class GameController {
 
     private final GameService gameService;
     private final Board board;
+    private final MoveService moveService;
 
     @Autowired
-    public GameController(GameService gameService, Board board) {
+    public GameController(GameService gameService, Board board, MoveService moveService) {
         this.gameService = gameService;
         this.board = board;
+        this.moveService = moveService;
     }
 
     @MessageMapping("/hello") // client sends here
@@ -45,6 +48,7 @@ public class GameController {
     public Board generateBoard(String message) throws Exception {
 //        Board board = new Board(8,8);
         if ("generate".equalsIgnoreCase(message.trim())) {
+//            return new Board();
             return new Board();
         }
         return null;
@@ -53,7 +57,7 @@ public class GameController {
     @MessageMapping("/makeMove")
     @SendTo("/topic/board")
     public Board makeMove(MoveRequest moveRequest) throws Exception {
-        board.applyMove(moveRequest);
+        moveService.applyMove(moveRequest);
 
 ////        if (board.isMatch(moveRequest.getTargetRow(), moveRequest.getTargetCol())) {
 ////            board.applyMove(moveRequest);
